@@ -19,8 +19,27 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Postagem {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotBlank
+	@Size(min = 5, max = 300)
+	private String titulo;
+
+	@NotBlank
+	@Size(min = 1, max = 3000)
+	private String texto;
+
+	@UpdateTimestamp
+	private LocalDateTime data;
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -29,11 +48,7 @@ public class Postagem {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@NotBlank
-	@Size( min = 5 , max = 300 )
-	private String titulo;
-	
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -41,11 +56,7 @@ public class Postagem {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
-	@NotBlank
-	@Size( min = 1 , max = 3000 )
-	private String texto;
-	
+
 	public String getTexto() {
 		return texto;
 	}
@@ -53,10 +64,7 @@ public class Postagem {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
-	@UpdateTimestamp
-	private LocalDateTime data;
-	
+
 	public LocalDateTime getData() {
 		return data;
 	}
@@ -64,12 +72,6 @@ public class Postagem {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
-	
-	
-	@ManyToOne
-	@JsonIgnoreProperties("postagem")
-	private Tema tema;
-	
 
 	public Tema getTema() {
 		return tema;
@@ -78,5 +80,15 @@ public class Postagem {
 	public void setTema(Tema tema) {
 		this.tema = tema;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
+	
+
 }
