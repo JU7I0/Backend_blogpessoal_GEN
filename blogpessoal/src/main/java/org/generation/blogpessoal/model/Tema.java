@@ -22,6 +22,13 @@ public class Tema {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
+	private String descricao;
+	
+	@OneToMany(mappedBy = "tema" , cascade = CascadeType.REMOVE) 
+	@JsonIgnoreProperties("tema")
+	private List<Postagem> postagem;
+
 	public Long getId() {
 		return id;
 	}
@@ -29,11 +36,7 @@ public class Tema {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	@NotBlank
-	private String descricao;
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -41,10 +44,6 @@ public class Tema {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	@OneToMany(mappedBy = "tema" , cascade = CascadeType.REMOVE) 
-	@JsonIgnoreProperties("tema")
-	private List<Postagem> postagem;
 
 	public List<Postagem> getPostagem() {
 		return postagem;
@@ -53,12 +52,5 @@ public class Tema {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
 
-
-	
-
-	
-	
-	
 }
